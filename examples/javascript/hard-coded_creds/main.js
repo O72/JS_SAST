@@ -1,7 +1,7 @@
 function main() {
     let password = "Super secret password";
-    let email = "tmp@gmail.com"
+    let email = "omar@gmail.com"
     console.log(password);
     console.log(email);
-    let token = "ad"
+    let token = "asfsfs3r356232hm1337"
 }
