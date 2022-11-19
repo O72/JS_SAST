@@ -45,6 +45,12 @@ To run tests, run the following command
 ```
 
 
+## Documentation
+
+[Writing a custom ruleset](https://github.com/O72/JS_SAST/wiki/Writing-a-custom-ruleset)
+
+
+
 ## FAQ
 
 #### Question 1
