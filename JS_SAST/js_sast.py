@@ -5,6 +5,7 @@ import report.statistics as stats
 import datetime
 from colorama import Fore
 from colorama import Style
+import subprocess
 
 
 def arg_parser():
@@ -13,9 +14,13 @@ def arg_parser():
     :return: the Namespace of the input arguments.
     """
     parser = argparse.ArgumentParser(prog='js_sast.py', usage='%(prog)s [options]')
-    options = parser.add_argument_group('Flag options', '')
-    options.add_argument('-p', '--path', nargs=1,
-                         help='file: file or directory path to be scanned')
+    options = parser.add_argument_group('Required options')
+    options.add_argument('-p', '--path', action='store',
+                         help='file: file or directory path to be scanned', required=True)
+    parser.add_argument('-g', '--gosec', action='store', help='-g gosec, to run gosec on the target repository to scan'
+                                                               'for vulnerabilities in Go source code.')
+    parser.add_argument('-b', '--bandit', action='store', help='-b bandit, to run bandit on the target repository to '
+                                                                'scan for vulnerabilities in Python source code.')
 
     if len(sys.argv) < 2:
         parser.print_help()
@@ -30,7 +35,7 @@ def main():
 
     print(f"[INFO] Scan Started: {Fore.GREEN}{datetime.datetime.utcnow()}{Style.RESET_ALL}")
 
-    path = args.path[0]
+    path = args.path
     js_files = Scanner(path=path, filename=None).get_js_files()
     total_scan_lines = 0
     for file in js_files:
@@ -38,6 +43,11 @@ def main():
         total_scan_lines += line_number
 
     stats.overall_stats(total_scan_lines)
+
+    if args.gosec:
+        subprocess.run(["gosec", f"{path}/..."], shell=False)
+    if args.bandit:
+        subprocess.run(["bandit", "-r", f"{path}"], shell=False)
 
 
 if __name__ == '__main__':
