@@ -13,20 +13,21 @@ class Rule:
         self.open_redirect()
         self.weak_hash()
         self.eval_function()
+        self.logging_vulnerabilities()
 
     def secrets(self):
-        issue_type = "Possible hardcoded secrets"
+        issue_type = "Hardcoded Secrets"
         severity = 'High'
         confidence = 'High'
         CWE = 'CWE-798: Use of Hard-coded Credentials (https://cwe.mitre.org/data/definitions/798.html)'
         description = "Learn More: (https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/)"
         location = f'{self.filename}#{self.line_number}'
-        secret = re.search(r"((pas+wo?r?d|pass(phrase)?|pwd|token|secrete?).(?:=))", self.line, re.IGNORECASE)
+        secret = re.search(r"((pas+wo?r?d|pass(phrase)?|pwd|token|secrete?).(= ('|\")))", self.line, re.IGNORECASE)
         if secret:
             Format(self.filename, self.line, self.line_number, issue_type, severity, confidence, CWE, location, description)
 
     def sql_injection(self):
-        issue_type = "Improper sanitization of SQL query"
+        issue_type = "Improper Sanitization of SQL Query"
         severity = 'Medium'
         confidence = 'High'
         CWE = 'CWE-89: Improper Neutralization of Special Elements used in an SQL Command (SQL Injection) (' \
@@ -45,7 +46,8 @@ class Rule:
         description = "Learn More: (https://owasp.org/Top10/A04_2021-Insecure_Design/)"
         location = f'{self.filename}#{self.line_number}'
         secret = re.search(
-            r"(res\.redirect\()", self.line, re.IGNORECASE)
+            r"(res.redirect\((?:req.body.redirect_url|req.id.redirect_url|req.param.redirect_url|req.query.redirect_url)."
+            r"*(?:req.body.redirect_url|req.id.redirect_url|req.param.redirect_url|req.query.redirect_url))", self.line, re.IGNORECASE)
         if secret:
             Format(self.filename, self.line, self.line_number, issue_type, severity, confidence, CWE, location, description)
 
@@ -74,8 +76,20 @@ class Rule:
         if secret:
             Format(self.filename, self.line, self.line_number, issue_type, severity, confidence, CWE, location, description)
 
+    def logging_vulnerabilities(self):
 
-# switch the rules to be parsed through json file
+        issue_type = "Insufficient Logging"
+        severity = 'Low'
+        confidence = 'Low'
+        CWE = "CWE-532: Insertion of Sensitive Information into Log File (https://cwe.mitre.org/data/definitions/532.html)"
+        description = "Learn More: (https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/)"
+        location = f'{self.filename}#{self.line_number}'
+        secret = re.search(
+            r"(log\((?:\'|\"|.*)(?:req.id|req.query|req.body|req.param))", self.line, re.IGNORECASE)
+        if secret:
+            Format(self.filename, self.line, self.line_number, issue_type, severity, confidence, CWE, location,
+                   description)
+
 
 
 # csrf https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
