@@ -1,6 +1,6 @@
 import sys
 import argparse
-from scanner import Scanner
+from js_sast.scanner import Scanner
 import report.js_statistics as stats
 import datetime
 from colorama import Fore
