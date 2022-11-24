@@ -1,0 +1,114 @@
+secrets:
+  issue_type: Hardcoded Secrets
+  severity: High
+  confidence: High
+  CWE: "CWE-798: Use of Hard-coded Credentials (https://cwe.mitre.org/data/definitions/798.html)"
+  description: "Learn More: (https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)"
+  remediation: |
+    Remove hard-coded credentials, such as passwords and tokens from source code.
+    Alternatively, store them in configuration files or environment variables
+    If possible, store them in a secure location with restricted access, such as a vault.
+  regex: >-
+    ((pas+wo?r?d|pass(phrase)?|pwd|token|secret?|cred?).(= ('|\"))|(pas+wo?r?d|pass(phrase)?|pwd|token|secret?|cred?)(: ('|\")))
+
+sql_injection:
+  issue_type: Improper Sanitization of SQL Query
+  severity: Medium
+  confidence: Medium
+  CWE: "CWE-89: Improper Neutralization of Special Elements used in an SQL Command (SQL Injection) (https://cwe.mitre.org/data/definitions/89.html)"
+  description: "Learn More: (https://owasp.org/Top10/A03_2021-Injection/)"
+  remediation: |
+    ""
+  regex: >-
+    (?:select|find|drop|create|delete|count|bulk|copy).*where.*?=.*?(req\.id|req\.query|req\.body|req\.param)
+
+xpath_injection:
+  issue_type: Improper Neutralization of Data within XPath Expressions ('XPath Injection')
+  severity: Medium
+  confidence: Medium
+  CWE: "CWE-643: Improper Neutralization of Data within XPath Expressions ('XPath Injection') (https://cwe.mitre.org/data/definitions/643.html)"
+  description: "Learn More: (https://owasp.org/Top10/A03_2021-Injection/)"
+  remediation: |
+    Sanitize the passed data or use variable references to safely embed it without altering the structure of the expression,
+    if the user input must be included in an XPath expression. Alternatively, use variable replacement mechanism provided by XPATH
+  regex: >-
+    xpath.parse\((?:\'|\").+(\+)
+
+open_redirect:
+  issue_type: Redirection to Untrusted Site
+  severity: Low
+  confidence: Medium
+  CWE: "CWE-601: URL Redirection to Untrusted Site ('Open Redirect')(https://cwe.mitre.org/data/definitions/601.html)"
+  description: "Learn More: (https://owasp.org/Top10/A01_2021-Broken_Access_Control/)"
+  remediation: |
+    To protect against untrusted URL redirection, it is recommended to avoid passing user input directly into a redirect URL.
+    Instead, whitelist authorized redirects on the server.
+  regex: >-
+    res.redirect\((?:req.body|req.id|req.param|req.query)
+
+weak_hash:
+  issue_type: Use of Weak Hash
+  severity: Medium
+  confidence: High
+  CWE: "CWE-328: Use of Weak Hash (https://cwe.mitre.org/data/definitions/328.html)"
+  description: "Learn More: (https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)"
+  remediation: |
+    Use a secure password hashing algorithm such as BCRYPT, SCRYPT, PBKDF2, or Argon2.
+  regex: >-
+    createHash\((?:'|\"|.+)(.+md5|sha1)(?:'|\")
+
+weak_cipher:
+  issue_type: Use of a Broken or Weak Cryptographic Algorithm
+  severity: Medium
+  confidence: High
+  CWE: "CWE-327: Use of a Broken or Risky Cryptographic Algorithm (https://cwe.mitre.org/data/definitions/327.html)"
+  description: "Learn More: (https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)"
+  remediation: |
+    Ensure that you use a strong, modern cryptographic algorithm.
+  regex: >-
+    createCipher\((?:'|\"|.+)(.+des)
+
+insecure_randomness:
+  issue_type: Insecure Randomness
+  severity: Low
+  confidence: Medium
+  CWE: "CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)(https://cwe.mitre.org/data/definitions/338.html)"
+  description: "Learn More: (https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)"
+  remediation: |
+    Use a cryptographically secure pseudo-random number generator, such as crypto.getRandomBytes or RandomSource.getRandomValues
+  regex: >-
+    Math.random
+
+eval_function:
+  issue_type: Eval Injection
+  severity: Low
+  confidence: Low
+  CWE: "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection') (https://cwe.mitre.org/data/definitions/95.html) "
+  description: "Learn More: (https://owasp.org/www-community/attacks/Direct_Dynamic_Code_Evaluation_Eval%20Injection)"
+  remediation: |
+    Try to avoid the use of eval(), instead consider the use of Function() as it is faster and more secure alternative to eval().
+  regex: >-
+    eval.\(*.*\)
+
+settimeout_function:
+  issue_type: Use of Potentially Dangerous Function
+  severity: Medium
+  confidence: Medium
+  CWE: "CWE-676: Use of Potentially Dangerous Function (https://cwe.mitre.org/data/definitions/676.html)"
+  description: "Learn More: (https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)"
+  remediation: |
+    If the use of settimeout is required do not pass it a string to evaluate but a function.
+    Alternatively, consider using a framework such as jQuery.
+  regex: >-
+    settimeout\(.*(\"|\')
+
+logging_vulnerabilities:
+  issue_type: Insufficient Logging
+  severity: Low
+  confidence: Low
+  CWE: "CWE-532: Insertion of Sensitive Information into Log File (https://cwe.mitre.org/data/definitions/532.html)"
+  description: "Learn More: (https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/)"
+  remediation: |
+    Ensure that sensitive information is always encrypted before being stored.
+  regex: >-
+    log\((?:\'|\"|.*)(?:req.id|req.query|req.body|req.param)
