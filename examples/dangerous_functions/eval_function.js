@@ -1,6 +1,10 @@
 function myMethod(foo) {
     console.log(foo + ": " + eval(foo));
 }
+export function unsafeDeserialize(value) {
+  return eval(`(${value})`);
+}
 
-var foo = "something";
-myMethod("foo");
+export function unsafeGetter(obj, path) {
+    return eval(`obj.${path}`);
+}

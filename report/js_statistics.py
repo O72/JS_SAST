@@ -44,8 +44,12 @@ def set_lows_by_confidence(lows):
 
 
 def overall_stats(scanned_lines):
+    # Total Issues
+    total_issues = all_highs_by_severity + all_mediums_by_severity + all_lows_by_severity
+
     print(f"{Fore.LIGHTMAGENTA_EX}Overall Statistics: {Style.RESET_ALL} \n"
           f"  Total scanned lines of code: {scanned_lines} \n"
+          f"  Total Issues Found {total_issues}! \n"
           f"  Total Issues (by severity): \n"
           f"        {Fore.LIGHTBLUE_EX}Low:{Style.RESET_ALL} {all_lows_by_severity}{Style.RESET_ALL} \n"
           f"        {Fore.YELLOW}Medium:{Style.RESET_ALL} {all_mediums_by_severity} \n"

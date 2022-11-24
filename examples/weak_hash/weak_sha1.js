@@ -4,3 +4,4 @@ function hash_sha1(hash) {
     var hashed = hasher.update(hash).digest("hex"); // BAD
     return hashed;
 }
+

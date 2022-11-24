@@ -1,10 +1,10 @@
 from colorama import Fore
 from colorama import Style
-import report.statistics as stats
+import report.js_statistics as stats
 
 class Format:
 
-    def __init__(self, filename, line, line_number, issue_type, severity, confidence, CWE, location, description):
+    def __init__(self, filename, line, line_number, issue_type, severity, confidence, CWE, location, description, remediation):
         self.filename = filename
         self.line = line
         self.line_number = line_number
@@ -14,6 +14,7 @@ class Format:
         self.CWE = CWE
         self.location = location
         self.description = description
+        self.remediation = remediation
         if self.confidence == "High":
             stats.set_highs_by_confidence(1)
         if self.confidence == "Medium":
@@ -40,5 +41,6 @@ class Format:
               f"  Location: {self.location} \n"
               f"  {self.CWE} \n"
               f"  {self.description} {Style.RESET_ALL}\n"
+              f"  {Fore.GREEN}Remediation: {self.remediation} {Style.RESET_ALL} \n"
               f"      {self.line} \n"
               f"----------------------------------------------")

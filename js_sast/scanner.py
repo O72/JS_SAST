@@ -1,5 +1,5 @@
 import glob
-from JS_SAST.rules import Rule
+from rules import Rule
 from colorama import Fore
 from colorama import Style
 
