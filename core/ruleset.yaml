@@ -55,7 +55,7 @@ weak_hash:
   remediation: |
     Use a secure password hashing algorithm such as BCRYPT, SCRYPT, PBKDF2, or Argon2.
   regex: >-
-    createHash\((?:'|\"|.+)(.+md5|sha1)(?:'|\")
+    createHash\( {0,}(?:'|\") {0,}(md5|sha1)(?:'|\")
 
 weak_cipher:
   issue_type: Use of a Broken or Weak Cryptographic Algorithm
@@ -66,7 +66,7 @@ weak_cipher:
   remediation: |
     Ensure that you use a strong, modern cryptographic algorithm.
   regex: >-
-    createCipher\((?:'|\"|.+)(.+des)
+    createCipher\( {0,}(?:'|\") {0,}(des)(?:'|\")
 
 insecure_randomness:
   issue_type: Insecure Randomness
@@ -100,7 +100,7 @@ settimeout_function:
     If the use of settimeout is required do not pass it a string to evaluate but a function.
     Alternatively, consider using a framework such as jQuery.
   regex: >-
-    settimeout\(.*(\"|\')
+    settimeout\( {0,}(\"|\')
 
 logging_vulnerabilities:
   issue_type: Insufficient Logging
