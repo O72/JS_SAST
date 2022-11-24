@@ -3,7 +3,6 @@ from report.formatting import Format
 
 
 class Rule:
-
     def __init__(self, filename, line, line_number):
         self.filename = filename
         self.line = line.strip()
