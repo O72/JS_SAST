@@ -59,8 +59,7 @@ gif or link to demo
 To run tests, run the following command
 
 ```bash
-  cd js_sast
-  python3 js_sast.py -f ../examples
+  python3 js_sast.py -f examples
 ```
 
 

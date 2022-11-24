@@ -2,6 +2,7 @@ from colorama import Fore
 from colorama import Style
 import report.js_statistics as stats
 
+
 class Format:
 
     def __init__(self, filename, line, line_number, issue_type, severity, confidence, CWE, location, description, remediation):
