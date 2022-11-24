@@ -51,8 +51,7 @@ Argument options:
 
 ## Demo
 
-gif or link to demo
-
+![JS_demo](https://media.giphy.com/media/fPRsu45lfErQfGUtFU/giphy.gif)
 
 ## Running Tests
 
