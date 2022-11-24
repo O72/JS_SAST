@@ -1,5 +1,5 @@
 import glob
-from core.rules import Rule
+from core.ruleset_engine import Rule
 from colorama import Fore
 from colorama import Style
 
