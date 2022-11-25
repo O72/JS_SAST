@@ -1,8 +1,12 @@
+"""
+This file is responsible for formatting the output to the user
+"""
+
 from colorama import Fore
 from colorama import Style
 import report.js_statistics as stats
 
-
+# This class is responsible for formatting the findings to be displayed to the user.
 class Format:
 
     def __init__(self, filename, line, line_number, issue_type, severity, confidence, CWE, location, description, remediation):
@@ -35,6 +39,9 @@ class Format:
         self.formatting()
 
     def formatting(self):
+        """
+        Printing the findings in a nice format.
+        """
 
         print(f"~ {self.color}Rule Type: {self.issue_type} \n"
               f"  Severity: {self.severity} \n"

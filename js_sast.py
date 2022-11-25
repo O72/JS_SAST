@@ -23,7 +23,7 @@ def arg_parser():
     options.add_argument('-b', '--bandit', action='store', help='-b bandit, to run bandit on the target repository to '
                                                                 'scan for vulnerabilities in Python source code.')
     options.add_argument('-c', '--clone', action='store', help='-c https://github.com/O72/JS_SAST.git, to clone remote'
-                                                              'repository to the current directory to be scanned')
+                                                               'repository to the current directory to be scanned')
 
     if len(sys.argv) < 2:
         parser.print_help()
@@ -43,12 +43,12 @@ def main():
         git.Repo.clone_from(f'{args.clone}', f'{repo}')
 
     path = args.path
-    if path.split(".")[-1] == "js":
+    if path.split(".")[-1] == "js":  # checks if the input file is a single file
         total_scan_lines = 0
         line_number = Scanner(path=None, filename=path).scan_file()
         total_scan_lines += line_number
         stats.overall_stats(total_scan_lines)
-    else:
+    else:  # if it is a directory
         js_files = Scanner(path=path, filename=None).get_js_files()
         total_scan_lines = 0
         for file in js_files:

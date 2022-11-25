@@ -8,16 +8,28 @@ all_lows_by_severity = 0
 
 
 def set_highs_by_severity(highs):
+    """
+    This function is responsible of track highs severity findings
+    :param highs: int to track the number of highs
+    """
     global all_highs_by_severity
     all_highs_by_severity += highs
 
 
 def set_mediums_by_severity(mediums):
+    """
+    This function is responsible of track mediums severity findings
+    :param mediums: int to track the number of mediums
+    """
     global all_mediums_by_severity
     all_mediums_by_severity += mediums
 
 
 def set_lows_by_severity(lows):
+    """
+    This function is responsible of track lows severity findings
+    :param lows: int to track the number of lows
+    """
     global all_lows_by_severity
     all_lows_by_severity += lows
 
@@ -29,16 +41,28 @@ all_lows_by_confidence = 0
 
 
 def set_highs_by_confidence(highs):
+    """
+    This function is responsible of track high confidence findings
+    :param highs: int to track the number of highs
+    """
     global all_highs_by_confidence
     all_highs_by_confidence += highs
 
 
 def set_mediums_by_confidence(mediums):
+    """
+    This function is responsible of track mediums confidence findings
+    :param mediums: int to track the number of highs
+    """
     global all_mediums_by_confidence
     all_mediums_by_confidence += mediums
 
 
 def set_lows_by_confidence(lows):
+    """
+    This function is responsible of track lows confidence findings
+    :param lows: int to track the number of highs
+    """
     global all_lows_by_confidence
     all_lows_by_confidence += lows
 

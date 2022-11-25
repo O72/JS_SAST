@@ -2,7 +2,7 @@ import re
 from report.formatting import Format
 import yaml
 
-
+# This class is responsible of applying each of the rulesets to each of the js source code lines.
 class Rule:
     def __init__(self, filename, line, line_number):
         self.filename = filename
@@ -11,6 +11,10 @@ class Rule:
         self.ruleset_engine()
 
     def ruleset_engine(self):
+        """
+        This function alternate over each of the rulesets on ruleset.yaml file and scan it against each js line.
+        :return:
+        """
         with open('core/ruleset.yaml', 'r') as ruleset:
             rules = yaml.safe_load(ruleset)
             for rule in rules:

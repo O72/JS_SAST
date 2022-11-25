@@ -3,15 +3,19 @@ from core.ruleset_engine import Rule
 from colorama import Fore
 from colorama import Style
 
+# This class is used to scan js files and look for instances matching rulesets.
 class Scanner:
 
     def __init__(self, path, filename):
-
         self.path = path
         self.filename = filename
         self.line_number = 0
 
     def get_js_files(self) -> list:
+        """
+        This function is used to retrieve all of the js files in a given directory
+        :return: a list of all of the js files within a repository
+        """
         js_files = []
         if self.path.endswith("/") is False:
             # path needs a trailing slash (i.e. /root/dir/)
@@ -25,7 +29,10 @@ class Scanner:
         return js_files
 
     def scan_file(self):
-
+        """
+        This function applies the rulesets to each of lines in a js file.
+        :return: number of lines in a scanned file
+        """
         with open(self.filename, 'r') as f:
             current_file = f.readlines()
             for line in current_file:
