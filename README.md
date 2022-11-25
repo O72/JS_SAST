@@ -76,4 +76,4 @@ No, If the rule for a certain vulnerability or a bug is not implemented/supporte
 
 #### Where are the rulesets located?
 
-The rulesets are located in core/ruleset.yaml
+The rulesets are located in `core/ruleset.yaml`
