@@ -74,3 +74,6 @@ To run tests, run the following command
 
 No, If the rule for a certain vulnerability or a bug is not implemented/supported, the tool will not catch it. Check the documentation section to learn how to add support to a new rule.
 
+#### Where are the rulesets located?
+
+The rulesets are located in core/ruleset.yaml
