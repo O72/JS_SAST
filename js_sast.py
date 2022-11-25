@@ -43,13 +43,19 @@ def main():
         git.Repo.clone_from(f'{args.clone}', f'{repo}')
 
     path = args.path
-    js_files = Scanner(path=path, filename=None).get_js_files()
-    total_scan_lines = 0
-    for file in js_files:
-        line_number = Scanner(path=None, filename=file).scan_file()
+    if path.split(".")[-1] == "js":
+        total_scan_lines = 0
+        line_number = Scanner(path=None, filename=path).scan_file()
         total_scan_lines += line_number
+        stats.overall_stats(total_scan_lines)
+    else:
+        js_files = Scanner(path=path, filename=None).get_js_files()
+        total_scan_lines = 0
+        for file in js_files:
+            line_number = Scanner(path=None, filename=file).scan_file()
+            total_scan_lines += line_number
 
-    stats.overall_stats(total_scan_lines)
+        stats.overall_stats(total_scan_lines)
 
     if args.gosec:
         subprocess.run(["gosec", f"{path}/..."], shell=False)
