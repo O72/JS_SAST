@@ -1,6 +1,5 @@
 import re
 from report.formatting import Format
-import yaml
 
 # This class is responsible of applying each of the rulesets to each of the js source code lines.
 class Rule:

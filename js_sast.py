@@ -7,6 +7,7 @@ from colorama import Fore
 from colorama import Style
 import subprocess
 import git
+import yaml
 
 
 def arg_parser():
@@ -42,24 +43,27 @@ def main():
         repo = args.clone.split("/")[-1].split(".")[0]
         git.Repo.clone_from(f'{args.clone}', f'{repo}')
 
+    with open('core/ruleset.yaml', 'r') as ruleset:
+        rules = yaml.safe_load(ruleset)  # loads rulests to be used in ruleset_engine
+
     path = args.path
     if path.split(".")[-1] == "js":  # checks if the input file is a single file
         total_scan_lines = 0
-        line_number = Scanner(path=None, filename=path).scan_file()
+        line_number = Scanner(path=None, filename=path, rules=rules).scan_file()
         total_scan_lines += line_number
         stats.overall_stats(total_scan_lines)
     else:  # if it is a directory
         js_files = Scanner(path=path, filename=None).get_js_files()
         total_scan_lines = 0
         for file in js_files:
-            line_number = Scanner(path=None, filename=file).scan_file()
+            line_number = Scanner(path=None, filename=file, rules=rules).scan_file()
             total_scan_lines += line_number
 
         stats.overall_stats(total_scan_lines)
 
-    if args.gosec:
+    if args.gosec:  # gosec integration
         subprocess.run(["gosec", f"{path}/..."], shell=False)
-    if args.bandit:
+    if args.bandit:  # bandit integration
         subprocess.run(["bandit", "-r", f"{path}"], shell=False)
 
 

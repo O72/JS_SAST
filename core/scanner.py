@@ -2,14 +2,14 @@ import glob
 from core.ruleset_engine import Rule
 from colorama import Fore
 from colorama import Style
-import yaml
 
 # This class is used to scan js files and look for instances matching rulesets.
 class Scanner:
 
-    def __init__(self, path, filename):
+    def __init__(self, path, filename, rules=None):
         self.path = path
         self.filename = filename
+        self.rules = rules
         self.line_number = 0
 
     def get_js_files(self) -> list:
@@ -31,14 +31,12 @@ class Scanner:
 
     def scan_file(self):
         """
-        This function loads the rulesets and applies the them to each of lines in a js file.
+        This function applies the them to each of lines in a js file.
         :return: number of lines in a scanned file
         """
-        with open('core/ruleset.yaml', 'r') as ruleset:
-            rules = yaml.safe_load(ruleset)
         with open(self.filename, 'r') as f:
             current_file = f.readlines()
             for line in current_file:
                 self.line_number += 1
-                Rule(self.filename, line, self.line_number, rules)
+                Rule(self.filename, line, self.line_number, self.rules)
         return self.line_number
