@@ -88,7 +88,7 @@ eval_function:
   remediation: |
     Try to avoid the use of eval(), instead consider the use of Function() as it is faster and more secure alternative to eval().
   regex: >-
-    eval\(.+\)
+    \beval\(.+\)
 
 settimeout_function:
   issue_type: Use of Potentially Dangerous Function
