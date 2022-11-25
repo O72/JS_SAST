@@ -44,7 +44,7 @@ Argument options:
                         scan for vulnerabilities in Python source code.
   -c CLONE, --clone CLONE
                         -c https://github.com/O72/JS_SAST.git, to clone
-                        remoterepository to the current directory to be
+                        remot erepository to the current directory to be
                         scanned
 ```
 
