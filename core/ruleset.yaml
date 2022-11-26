@@ -18,7 +18,8 @@ sql_injection:
   CWE: "CWE-89: Improper Neutralization of Special Elements used in an SQL Command (SQL Injection) (https://cwe.mitre.org/data/definitions/89.html)"
   description: "Learn More: (https://owasp.org/Top10/A03_2021-Injection/)"
   remediation: |
-    ""
+    To avoid SQL injection flaws. Either: 1. stop writing dynamic queries with string concatenation.
+    and/or 2. prevent user input which contains malicious SQL from affecting the logic of the executed query.
   regex: >-
     (?:select|find|drop|create|delete|count|bulk|copy).*where.*?=.*?(req\.id|req\.query|req\.body|req\.param)
 
