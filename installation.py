@@ -20,4 +20,5 @@ def install_gosec():
     """
     This function is used to install bandit tool on the target system
     """
-    subprocess.run(["curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.14.0"], shell=False)
+    subprocess.run(["curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.14.0"],
+                   shell=False)
