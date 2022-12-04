@@ -38,7 +38,7 @@ Argument options:
   -p PATH, --path PATH  file: file or directory path to be scanned
   -g GOSEC, --gosec GOSEC
                         -g gosec, to run gosec on the target repository to
-                        scanfor vulnerabilities in Go source code.
+                        scan for vulnerabilities in Go source code.
   -b BANDIT, --bandit BANDIT
                         -b bandit, to run bandit on the target repository to
                         scan for vulnerabilities in Python source code.
