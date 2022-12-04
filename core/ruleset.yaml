@@ -45,7 +45,7 @@ open_redirect:
     To protect against untrusted URL redirection, it is recommended to avoid passing user input directly into a redirect URL.
     Instead, whitelist authorized redirects on the server.
   regex: >-
-    res.redirect\((?:req.body|req.id|req.param|req.query)
+    res.redirect\(.+(?:req.body|req.id|req.param|req.query)
 
 weak_hash:
   issue_type: Use of Weak Hash
