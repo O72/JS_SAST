@@ -33,7 +33,7 @@ xpath_injection:
     Sanitize the passed data or use variable references to safely embed it without altering the structure of the expression,
     if the user input must be included in an XPath expression. Alternatively, use variable replacement mechanism provided by XPATH
   regex: >-
-    xpath.parse\((?:\'|\").+(\+)
+    xpath.+\( {0,}(?:\'|\").+(\+)
 
 open_redirect:
   issue_type: Redirection to Untrusted Site
