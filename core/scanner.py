@@ -37,7 +37,7 @@ class Scanner:
         """
         if os.path.isdir(self.filename):
             return self.line_number
-        with open(self.filename, 'r') as f:
+        with open(self.filename, 'r', errors='ignore') as f:
             current_file = f.readlines()
             for line in current_file:
                 self.line_number += 1
