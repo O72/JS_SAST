@@ -2,6 +2,7 @@ import glob
 from core.ruleset_engine import Rule
 from colorama import Fore
 from colorama import Style
+import os
 
 # This class is used to scan js files and look for instances matching rulesets.
 class Scanner:
@@ -34,6 +35,8 @@ class Scanner:
         This function applies the them to each of lines in a js file.
         :return: number of lines in a scanned file
         """
+        if os.path.isdir(self.filename):
+            return self.line_number
         with open(self.filename, 'r') as f:
             current_file = f.readlines()
             for line in current_file:
